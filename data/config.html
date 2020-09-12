@@ -62,7 +62,7 @@
 	  <li class="nav-item active">
         <a class="nav-link" href="/">
           <i class="fas fa-fw fa-cog"></i>
-          <span>retour conso</span></a>
+          <span>retour index</span></a>
       </li>
 
  
@@ -139,8 +139,8 @@
 
           <!-- Page Heading -->
 		  <h1 class="h3 mb-2 text-gray-800">Configuration</h1>
-          <p class="mb-4">Page de configuration de votre pv routeur, pensez à sauvegarder votre configuration sur la flash après l'avoir appliqué.</p>
-		  <p class="mb-4">page rapide d'aide : <a href="doc.txt" target="_blank"> ici </a></p>
+          <p class="mb-4">pensez à sauvegarder votre configuration sur la flash après l'avoir appliqué.</p>
+		  
   
 
           <!-- Content Row -->
@@ -216,11 +216,15 @@
 
 				
 				<div class="form-group row">
-				 <div class="col-sm-3">Vmax</div>
+				<div class="col-sm-3">Vmax</div>
+				<div class="col-sm-3">refresh Time</div>
 				</div>
 				<div class="form-group row">
 				<div class="col-sm-3">
 					<input type="text" class="form-control form-control-user" id="Vmax" placeholder="%Vmax%">
+                </div>
+				<div class="col-sm-3">
+					<input type="text" class="form-control form-control-user" id="refresh" placeholder="%refresh%">
                 </div>
                 </div>
 
@@ -348,7 +352,8 @@ var recupconfig = $.get ({
 
 		document.getElementById("hostname").value = config[0];
 		document.getElementById("IDX").value = config[1];
-		document.getElementById("Vmax").innerHTML = config[3];
+		document.getElementById("Vmax").innerHTML = config[2];
+		document.getElementById("refresh").innerHTML = config[3];
 		document.getElementById("version").value = config[4];
 		
 

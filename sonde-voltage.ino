@@ -21,9 +21,9 @@
 int sensorPin = A0; 
 int sensorValue = 0;
 String logs ="";
-int voltagemax = 43 ; 
+
 float voltage; 
-int refreshtime = 60 ;  // in secondes 
+const String VERSION = "Version 1.0" ;
 
 //***********************************
 //************* Gestion du serveur WEB
@@ -45,6 +45,7 @@ struct Config {
   char hostname[15];
   String IDX;
   float Vmax;
+  int refresh; 
 };
 
 const char *filename_conf = "/config.json";
@@ -79,6 +80,7 @@ void loadConfiguration(const char *filename, Config &config) {
           sizeof(config.hostname));         // <- destination's capacity
   config.IDX = doc["IDX"] | 200; 
   config.Vmax = doc["Vmax"] | 42.00; 
+  config.refresh = doc["refresh"] | 5; 
   configFile.close();
       
 }
@@ -106,7 +108,8 @@ void saveConfiguration(const char *filename, const Config &config) {
   doc["hostname"] = config.hostname;
   doc["IDX"] = config.IDX;
   doc["Vmax"] = config.Vmax;
-  
+  doc["refresh"] = config.refresh;
+    
   // Serialize JSON to file
   if (serializeJson(doc, configFile) == 0) {
     Serial.println(F("Failed to write to file in function Save configuration "));
@@ -121,11 +124,12 @@ void saveConfiguration(const char *filename, const Config &config) {
 const char* PARAM_INPUT_server = "server"; /// paramettre de retour server domotique
 const char* PARAM_INPUT_IDX = "idx"; /// paramettre de retour idx
 const char* PARAM_INPUT_Vmax = "Vmax"; /// paramettre de retour voltage max
+const char* PARAM_INPUT_refresh = "refresh"; /// paramettre de retour refresh
 const char* PARAM_INPUT_save = "save"; /// paramettre de retour cosphi
 
 String getconfig() {
      
-  String configweb = String(config.hostname) + ";" + config.IDX + ";" + config.Vmax ;
+  String configweb = String(config.hostname) + ";" + config.IDX + ";" + config.Vmax + ";" + config.refresh + ";" + VERSION ;
   return String(configweb);
 }
 
@@ -283,6 +287,10 @@ server.on("/config.json", HTTP_ANY, [](AsyncWebServerRequest *request){
   server.on("/state", HTTP_ANY, [](AsyncWebServerRequest *request){
     request->send_P(200, "text/plain", getState().c_str());
   });
+
+  server.on("/config", HTTP_ANY, [](AsyncWebServerRequest *request){
+    request->send_P(200, "text/plain", getconfig().c_str());
+  });
   
 server.on("/get", HTTP_ANY, [] (AsyncWebServerRequest *request) {
     
@@ -294,6 +302,7 @@ server.on("/get", HTTP_ANY, [] (AsyncWebServerRequest *request) {
      if (request->hasParam(PARAM_INPUT_server)) { request->getParam(PARAM_INPUT_server)->value().toCharArray(config.hostname,15);  }
      if (request->hasParam(PARAM_INPUT_IDX)) { config.IDX = request->getParam(PARAM_INPUT_IDX)->value().toInt();}                    
      if (request->hasParam(PARAM_INPUT_Vmax)) { config.Vmax = request->getParam(PARAM_INPUT_Vmax)->value().toFloat();}
+     if (request->hasParam(PARAM_INPUT_refresh)) { config.refresh = request->getParam(PARAM_INPUT_refresh)->value().toInt();}                    
      request->send(200, "text/html", getconfig().c_str());
 
   });
@@ -317,12 +326,12 @@ void loop() {
   sensorValue = analogRead(sensorPin);
   Serial.println("valeur");
   
-  voltage = float(voltagemax) * float(sensorValue) / 1024;
+  voltage = float(config.Vmax) * float(sensorValue) / 1024;
   mqtt("83", String(voltage));
   Serial.println(voltage);
 
   
-  delay(refreshtime*1000 );
+  delay(config.refresh*1000 );
 }
 
 // ***********************************
