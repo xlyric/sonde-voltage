@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Pv router - Configuration</title>
+  <title>Voltage - Configuration</title>
 
   <!-- Custom fonts for this template-->
  <link href="all.min.css" rel="stylesheet" type="text/css"> 
@@ -33,7 +33,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Pv router</div>
+        <div class="sidebar-brand-text mx-3">Voltage</div>
       </a>
 
       <!-- Divider -->
@@ -163,26 +163,6 @@
               </div>
             </div>
 
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Sigma</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="sigma">%SIGMA%</span></div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-			
-
-
-
           </div>
 		  
 		            <!-- Content Row -->
@@ -221,7 +201,6 @@
               <form class="user" id="formulaire" method="post" action=""  >
 			    <div class="form-group row">
 			  	<div class="col-sm-6" >Serveur</div>
-				 <div class="col-sm-3">Port</div>
 				 <div class="col-sm-3">IDX</div>
 				</div>
 				 
@@ -230,97 +209,22 @@
                   <div class="col-sm-6">
                     <input type="text" class="form-control form-control-user" id="hostname" placeholder="%HOSTNAME%">
                   </div>
-                  <div class="col-sm-3">
-                   <input type="text" class="form-control form-control-user" id="port" placeholder="%PORT%">
-                  </div>
 				  <div class="col-sm-3">
                    <input type="text" class="form-control form-control-user" id="IDX" placeholder="%IDX%">
                   </div>
 				</div>
 
-                <div class="form-group">
-                 APIKey : <input type="text" class="form-control form-control-user" id="apiKey" placeholder="%APIKEY%">
-                </div>
-				<div class="form-group">
-                 Dimmer :<input type="text" class="form-control form-control-user" id="dimmer" placeholder="%DIMMER%">
-                </div>
-
-				<div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="UseDomoticz">
-                        <label class="custom-control-label" for="UseDomoticz" onclick="sendservermode(this.innerHTML);" >Domoticz</label>
-                      </div>
-                </div>
-
-				<div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-						<input type="checkbox" class="custom-control-input" id="UseJeedom">
-                        <label class="custom-control-label" for="UseJeedom" onclick="sendservermode(this.innerHTML);">Jeedom</label>
-                      </div>
-                </div>
-
-				<div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-						<input type="checkbox" class="custom-control-input" id="autonome">
-                        <label class="custom-control-label" for="autonome" onclick="sendservermode(this.innerHTML);" >autonome</label>
-                      </div>
-                </div>
-				
-				<div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-						<input type="checkbox" class="custom-control-input" id="Usemqtt">
-                        <label class="custom-control-label" for="Usemqtt" onclick="sendservermode(this.innerHTML);" >mqtt</label>
-                      </div>
-                </div
-				<div class="form-group">
-                 MQTT :<input type="text" class="form-control form-control-user" id="mqttserver" placeholder="%MQTTSERVER%">
-                </div>			
-
-
 				
 				<div class="form-group row">
-				 <div class="col-sm-3">delta</div>
-				  <div class="col-sm-3">deltaneg</div>
-				 
-
-				</div>
-				
-                <div class="form-group row">
-                  <div class="col-sm-3">
-				  <input type="text" class="form-control form-control-user" id="delta" placeholder="%DELTA%">
-                  </div>
-				  <div class="col-sm-3">
-				  <input type="text" class="form-control form-control-user" id="deltaneg" placeholder="%DELTANEG%">
-                  </div>
-				  
-				  
-		        </div>
-				
-				<div class="form-group row">
-				 <div class="col-sm-3">cosphi</div>
-				 <div class="col-sm-3">facteur</div>
+				 <div class="col-sm-3">Vmax</div>
 				</div>
 				<div class="form-group row">
-                  <div class="col-sm-3">
-                   <input type="text" class="form-control form-control-user" id="cosphi" placeholder="%COSPHI%">
-                  </div>
 				<div class="col-sm-3">
-					<input type="text" class="form-control form-control-user" id="facteur" placeholder="%facteur%">
+					<input type="text" class="form-control form-control-user" id="Vmax" placeholder="%Vmax%">
                 </div>
                 </div>
 
-				<div class="form-group row">
-				 <div class="col-sm-3">Dimmer Local</div>
-				</div>
-				<div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-						<input type="checkbox" class="custom-control-input" id="dimmerlocal">
-                        <label class="custom-control-label" for="dimmerlocal" onclick="sendservermode(this.innerHTML);" >dimmer local</label>
-                      </div>
-                </div>
-				  
 
-				
 	
 				
 				<input type="submit" value=" Application des parametres" class="btn btn-primary btn-user btn-block">
@@ -358,7 +262,6 @@ var xhttpstate = $.get ({
 		var config = result.split(";");
 		
 		document.getElementById("state").innerHTML = config[0];
-		document.getElementById("sigma").innerHTML = config[1];
 		
 		
 	
@@ -368,16 +271,6 @@ var xhttpstate = $.get ({
 
 
 	
-function sendmode (mode) {
-
-		$.get( "/get", { send: 	mode } )
-		.done(function(data) {
-		document.getElementById("sendmode").innerHTML = "Request sent";
-		document.getElementById("sendmode2").innerHTML = "Request sent";
-		});
-
-
-}
 
 function sendservermode (mode) {
 
@@ -386,10 +279,6 @@ function sendservermode (mode) {
 		$( "#saveform" ).text( "Configuration appliqué" ).show().fadeOut( 5000 );
 		var config = data.split(";");
 		document.getElementById("autonome").value = config[12];
-		document.getElementById("UseDomoticz").value = config[10];
-		document.getElementById("UseJeedom").value = config[11];
-		document.getElementById("dimmerlocal").value = config[14];
-		document.getElementById("Usemqtt").value = config[16];
 		}); 
 
 
@@ -428,7 +317,7 @@ $( "#save" ).click(function() {
 
 $( "#formulaire" ).submit(function() {
 
-	 var data = {'server':$('#hostname').val(), 'idx':$('#IDX').val(),	 'cosphi':$('#cosphi').val(), 'readtime':$('#readtime').val()	, 'cycle':$('#cycle').val(), 'dimmer':$('#dimmer').val(),'port':$('#port').val(), 'delta':$('#delta').val(),'deltaneg':$('#deltaneg').val(),  'apiKey':$('#apiKey').val(), 'facteur':$('#facteur').val(),'mqttserver':$('#mqttserver').val() } 
+	 var data = {'server':$('#hostname').val(), 'idx':$('#IDX').val(), 'Vmax':$('#Vmax').val()} 
 
 
 		
@@ -458,29 +347,10 @@ var recupconfig = $.get ({
         var config = recupconfig.split(";");
 
 		document.getElementById("hostname").value = config[0];
-		document.getElementById("port").value = config[1];	  
-		document.getElementById("IDX").value = config[2];
-		document.getElementById("version").innerHTML = config[3];
-		document.getElementById("delta").value = config[5];
-		document.getElementById("deltaneg").value = config[18];
-		document.getElementById("dimmer").value = config[7];
-		document.getElementById("cosphi").value = config[8];
+		document.getElementById("IDX").value = config[1];
+		document.getElementById("Vmax").innerHTML = config[3];
+		document.getElementById("version").value = config[4];
 		
-		document.getElementById("UseDomoticz").checked = config[10];
-		document.getElementById("UseJeedom").checked = config[11];
-		document.getElementById("autonome").checked = config[12];
-		document.getElementById("UseDomoticz").value = config[10];
-		document.getElementById("UseJeedom").value = config[11];
-		document.getElementById("autonome").value = config[12];
-		document.getElementById("apiKey").value = config[13];
-		document.getElementById("dimmerlocal").checked = config[14];
-		document.getElementById("dimmerlocal").value = config[14];
-		document.getElementById("facteur").value = config[15];
-		document.getElementById("mqttserver").value = config[17];
-		document.getElementById("Usemqtt").checked = config[16];
-		document.getElementById("Usemqtt").value = config[16];
-		
-	
 
 
 
