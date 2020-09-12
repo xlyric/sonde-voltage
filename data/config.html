@@ -321,7 +321,7 @@ $( "#save" ).click(function() {
 
 $( "#formulaire" ).submit(function() {
 
-	 var data = {'server':$('#hostname').val(), 'idx':$('#IDX').val(), 'Vmax':$('#Vmax').val()} 
+	 var data = {'server':$('#hostname').val(), 'idx':$('#IDX').val(), 'Vmax':$('#Vmax').val(), 'refresh':$('#refresh').val()} 
 
 
 		
@@ -352,8 +352,8 @@ var recupconfig = $.get ({
 
 		document.getElementById("hostname").value = config[0];
 		document.getElementById("IDX").value = config[1];
-		document.getElementById("Vmax").innerHTML = config[2];
-		document.getElementById("refresh").innerHTML = config[3];
+		document.getElementById("Vmax").value = config[2];
+		document.getElementById("refresh").value = config[3];
 		document.getElementById("version").value = config[4];
 		
 
